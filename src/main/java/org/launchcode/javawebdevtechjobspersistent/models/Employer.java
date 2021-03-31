@@ -1,29 +1,21 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Employer extends AbstractEntity {
 
-    private String employer;
 
-    @NotBlank
+    @NotNull
+    @Size(min = 3, max = 100, message = "Location can't be empty")
     private String location;
-
-    public Employer(String employer, @NotBlank String location) {
-        this.employer = employer;
-        this.location = location;
-    }
 
     public Employer(){ }
 
-    public String getEmployer() {
-        return employer;
-    }
-
-    public void setEmployer(String employer) {
-        this.employer = employer;
+    public Employer( String location) {
+        this.location = location;
     }
 
     public String getLocation() {
