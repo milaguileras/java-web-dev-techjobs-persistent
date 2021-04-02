@@ -1,22 +1,27 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Employer extends AbstractEntity {
 
+    @OneToMany
+    @JoinColumn(name="employer_id")
+    private final List<Job> jobs = new ArrayList<Job>();
 
-    @NotNull
-    @Size(min = 3, max = 100, message = "Location can't be empty")
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    @NotBlank(message= "Location is required")
     private String location;
 
-    public Employer(){ }
-
-    public Employer( String location) {
-        this.location = location;
-    }
+    public Employer() {}
 
     public String getLocation() {
         return location;
@@ -25,4 +30,5 @@ public class Employer extends AbstractEntity {
     public void setLocation(String location) {
         this.location = location;
     }
+
 }
